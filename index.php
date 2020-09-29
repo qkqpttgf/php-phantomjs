@@ -32,15 +32,18 @@ function h2p($url, $jpg)
 
 function base64EncodeImage($image_file)
 {
-  $base64_image = '';
-  $image_info = getimagesize($image_file);
-  $image_data = fread(fopen($image_file, 'r'), filesize($image_file));
-  //$base64_image = 'data:' . $image_info['mime'] . ';base64,' . chunk_split(base64_encode($image_data));
-  $base64_image = 'data:' . $image_info['mime'] . ';base64,' . base64_encode($image_data);
-  return $base64_image;
+    $base64_image = '';
+    $image_info = getimagesize($image_file);
+    $f = fopen($image_file, 'r');
+    if (!$f) return '';
+    $image_data = fread($f, filesize($image_file));
+    //$base64_image = 'data:' . $image_info['mime'] . ';base64,' . chunk_split(base64_encode($image_data));
+    $base64_image = 'data:' . $image_info['mime'] . ';base64,' . base64_encode($image_data);
+    return $base64_image;
 }
 
     $url = $_POST['aimurl'];
+    if ($url!=''&&substr($url, 0, 7)!='http://'&&substr($url, 0, 8)!='https://') $url = 'http://' . $url; 
     $tmp = sys_get_temp_dir();
     $jpg = $tmp . '/tmp.jpg';
     unlink($jpg);
@@ -53,6 +56,7 @@ function base64EncodeImage($image_file)
 <?php
     if ($url!='') {
         h2p($url, $jpg);
-        echo '<img src="' . base64EncodeImage($jpg) . '"></img>';
+        $b = base64EncodeImage($jpg);
+        if ($b!='') echo '<img src="' . $b . '"></img>';
     }
     
