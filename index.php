@@ -43,7 +43,7 @@ function base64EncodeImage($image_file)
     $url = $_POST['aimurl'];
     $tmp = sys_get_temp_dir();
     $jpg = $tmp . '/tmp.jpg';
-    unlink($base);
+    unlink($jpg);
     if ($url!='') {
         h2p($url, $jpg);
     }
