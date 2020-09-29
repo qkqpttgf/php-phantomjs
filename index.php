@@ -1,9 +1,10 @@
 <?php
 
-function h2p($url, $jpg)
-{
     require 'vendor/autoload.php';
     use JonnyW\PhantomJs\Client;
+
+function h2p($url, $jpg)
+{
 
     $client = Client::getInstance();
     
