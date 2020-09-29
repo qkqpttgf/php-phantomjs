@@ -28,6 +28,11 @@ function h2p($url, $jpg)
 
     // Send the request
     $client->send($request, $response);
+    
+    $r['stat'] = $response->getStatus();
+    $r['body'] = $response->getContent();
+    $r['head'] = $response->getHeaders();
+    return $r;
 }
 
 function base64EncodeImage($image_file)
@@ -55,8 +60,9 @@ function base64EncodeImage($image_file)
 </form>
 <?php
     if ($url!='') {
-        h2p($url, $jpg);
+        $r = h2p($url, $jpg);
         $b = base64EncodeImage($jpg);
         if ($b!='') echo '<img src="' . $b . '"></img>';
+        else echo '<pre>' . json_encode($r, JSON_PRETTY_PRINT) . '</pre>';
     }
     
