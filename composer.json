@@ -28,9 +28,9 @@
     },
     "autoload": {
         "psr-0": {
-            "JonnyW\\PhantomJs\\": "src"
+            "JonnyW\\PhantomJs\\": "."
         },
-		"classmap": ["src/"]
+		"classmap": ["./"]
     },
     "config": {
         "bin-dir": "bin"
