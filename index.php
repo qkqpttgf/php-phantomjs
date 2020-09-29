@@ -20,6 +20,8 @@ function h2p($url, $jpg)
     $request->setOutputFile($jpg);
     $request->setViewportSize($width, $height);
     $request->setCaptureDimensions($width, $height, $top, $left);
+    $request->setTimeout(5000);
+    $request->setDelay(5);
 
     /** 
      * @see JonnyW\PhantomJs\Http\Response 
@@ -30,8 +32,9 @@ function h2p($url, $jpg)
     $client->send($request, $response);
     
     $r['stat'] = $response->getStatus();
-    $r['body'] = $response->getContent();
     $r['head'] = $response->getHeaders();
+    $r['body'] = $response->getContent();
+
     return $r;
 }
 
