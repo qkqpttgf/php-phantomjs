@@ -65,7 +65,8 @@ function base64EncodeImage($image_file)
         $b = base64EncodeImage($jpg);
         if ($b!='') echo '<img src="' . $b . '"></img>';
         //else 
-            $r['body'] = htmlspecialchars(str_replace('\n', "\n", $r['body']));
-            echo '<pre>' . json_encode($r, JSON_PRETTY_PRINT) . '</pre>';
+            $html = htmlspecialchars(json_encode($r, JSON_PRETTY_PRINT));
+            $html = str_replace('\n', PHP_EOL, $html);
+            echo '<pre>' . $html . '</pre>';
     }
     
