@@ -44,13 +44,15 @@ function base64EncodeImage($image_file)
     $tmp = sys_get_temp_dir();
     $jpg = $tmp . '/tmp.jpg';
     unlink($jpg);
-    if ($url!='') {
-        h2p($url, $jpg);
-    }
+
 ?>
 <form method="post">
-    <input type="text" name="aimurl"></input>
+    <input type="text" name="aimurl" value="<?php echo $url;?>"></input>
     <input type="submit"></input>
 </form>
-<img src="<?php if ($url!='') echo base64EncodeImage($jpg);?>"></img>
+<?php
+    if ($url!='') {
+        h2p($url, $jpg);
+        echo '<img src="' . base64EncodeImage($jpg) . '"></img>';
+    }
     
